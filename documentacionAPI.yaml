@@ -1,0 +1,402 @@
+openapi: 3.0.1
+info:
+  title: Documentacion API clientes y productos
+  description: |-
+    Esta API codificada en .NET Core Web API proporciona endpoints para realizar operaciones de gestión de clientes y productos. Las operaciones que permite realizar son las siguientes:
+    
+    CLIENTES:
+    
+      * Obtener todos los clientes
+      * Crear un nuevo cliente
+      * Editar un cliente
+      * Eliminar un cliente
+    
+    Productos:
+    
+      * Obtener todos los productos
+      * Crear un nuevo producto
+      * Editar un producto
+      * Eliminar un producto
+  version: 1.0.0
+servers:
+- url: https://localhost:7004/api/Clientes/
+- url: https://localhost:7004/api/Productos/
+tags:
+- name: clientes
+  description: Este endpoint maneja toda información relacionada con la información de clientes
+- name: productos
+  description: Este endpoint maneja toda información relacionada con la información de los productos
+  
+paths:
+  /:
+    post:
+      tags:
+      - clientes
+      summary: Insertar un nuevo cliente
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyClientesPost'
+        required: true      
+      responses: 
+        200:
+          description: (OK) La información del cliente se guardó correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoClientesPost'
+        400:
+          $ref: '#/components/responses/Badrequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+      
+  /{idCliente}:
+    get:
+      tags:
+        - clientes
+      summary: Obtiene la información de la base de datos de un cliente
+      parameters: 
+        - name: idCliente
+          in: path
+          description: Identificador del cliente 
+          required: true
+          schema:
+            type: string
+      responses:
+        200: 
+          description: (OK) La información del cliente se obtuvo correctamente
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoclienteGet'
+        400:
+          $ref: '#/components/responses/Badrequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+          
+          
+  /{editarcliente}:
+    put:
+      tags:
+        - clientes
+      summary: Edita la información de un cliente existente
+      parameters: 
+        - name: editarcliente
+          in: path
+          description: Identificador del cliente a editar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExitoClientePut'
+        required: true
+      responses:
+        200:
+          description: (OK) La información del cliente se editó correctamente
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoClientePut'
+        400:
+          $ref: '#/components/responses/Badrequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+          
+          
+  /obtener-todos-clientes:
+    get:
+      tags:
+        - clientes
+      summary: Obtiene la lista de todos los clientes
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      responses:
+        200:
+          description: (OK) La lista de clientes se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoclientesGetAll'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        500:
+          $ref: '#/components/responses/ServerError'
+          
+          
+          
+          
+          
+  /crear_producto:
+    post:
+      tags:
+      - productos
+      summary: Insertar un nuevo producto
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BodyProductosPost'
+        required: true      
+      responses: 
+        200:
+          description: (OK) La información del cliente se guardó correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProductosPost'
+        400:
+          $ref: '#/components/responses/Badrequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+          
+          
+  /{idProducto}:
+    get:
+      tags:
+        - productos
+      summary: Obtiene la información de la base de datos de un producto
+      parameters: 
+        - name: idProducto
+          in: path
+          description: Identificador del producto
+          required: true
+          schema:
+            type: string
+      responses:
+        200: 
+          description: (OK) La información del producto se obtuvo correctamente
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProductoGet'
+        400:
+          $ref: '#/components/responses/Badrequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+          
+          
+  /{editarproducto}:
+    put:
+      tags:
+        - productos 
+      summary: Edita la información de un producto existente
+      parameters: 
+        - name: editarproducto
+          in: path
+          description: Identificador del producto a editar
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExitoProductoPut'
+        required: true
+      responses:
+        200:
+          description: (OK) La información del producto se editó correctamente
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProductoPut'
+        400:
+          $ref: '#/components/responses/Badrequest'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        404:
+          $ref: '#/components/responses/NotFound'
+        500:
+          $ref: '#/components/responses/ServerError'
+          
+          
+  /obtener-todos-productos:
+    get:
+      tags:
+        - productos
+      summary: Obtiene la lista de todos los productos
+      parameters:
+        - $ref: '#/components/parameters/Token'
+      responses:
+        200:
+          description: (OK) La lista de productos se obtuvo correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExitoProductoGetAll'
+        401:
+          $ref: '#/components/responses/Unauthorized'
+        500:
+          $ref: '#/components/responses/ServerError'
+          
+          
+          
+          
+          
+          
+          
+          
+
+          
+components:
+  responses:
+    Unauthorized:
+      description: (Unauthorized) No hay autorización para llamar al servicio
+    NotFound:
+      description: (NotFound) No se encontró la información
+    Badrequest: 
+      description: (Badrequest) Los datos enviados son incorrectos
+    ServerError:
+      description: Error en el servidor
+  
+  parameters:
+    Token:
+      name: token
+      in: header
+      description: Token de autenticación
+      required: true
+      schema:
+        type: string
+  
+  schemas:
+    BodyClientesPost:
+      type: object
+      properties:
+        NombreCliente:
+          type: string
+          description: Nombre del cliente
+        ApellidoCliente:
+          type: string
+          description: Apellido del cliente
+        Telefono:
+          type: string
+          description: Teléfono del cliente
+          
+    ExitoClientesPost:
+      type: object
+      properties:
+        respuesta:
+          type: integer
+          enum: [1]
+          description: Bandera para indicar si el servicio fue exitoso
+        idCliente:
+          type: integer
+          enum: [222]
+          description: ID que le corresponde al cliente
+        
+    ExitoclienteGet:
+      type: object
+      properties:
+        NombreCliente:
+          type: string
+          description: Nombre del cliente
+        ApellidoCliente:
+          type: string
+          description: Apellido del cliente
+          
+    ExitoClientePut:
+      type: object
+      properties:
+        respuesta:
+          type: integer
+          enum: [1]
+          description: Bandera para indicar si el servicio de edición fue exitoso
+        mensaje:
+          type: string
+          description: id del cliente editado
+          
+    
+    ExitoclientesGetAll:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExitoclienteGet'
+
+      
+      
+      
+    
+    
+      
+    BodyProductosPost:
+      type: object
+      properties:
+        NombreProducto:
+          type: string
+          description: Nombre del producto
+        PrecioProducto:
+          type: integer
+          description: Precio del producto
+        Cantidad:
+          type: integer
+          description: Cantidad del producto
+          
+    ExitoProductosPost:
+      type: object
+      properties:
+        respuesta:
+          type: integer
+          enum: [1]
+          description: Bandera para indicar si el servicio fue exitoso
+        idProducto:
+          type: integer
+          enum: [222]
+          description: ID que le corresponde al producto
+        
+    ExitoProductoGet:
+      type: object
+      properties:
+        NombreProducto:
+          type: string
+          description: Nombre del cliente
+        PrecioProducto:
+          type: integer
+          description: precio del producto
+        CantidadProducto: 
+          type: integer
+          description: cantidad del producto
+          
+    ExitoProductoPut:
+      type: object
+      properties:
+        respuesta:
+          type: integer
+          enum: [1]
+          description: Bandera para indicar si el servicio de edición fue exitoso
+        mensaje:
+          type: string
+          description: id del producto editado
+          
+    
+    ExitoProductoGetAll:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExitoProductoGet'  
+        

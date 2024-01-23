@@ -1,0 +1,35 @@
+openapi: 3.0.3
+info:
+  title: Documentacion API clientes y productos
+  description: |-
+    esta API codificada en .net core web API proporciona endpoints para realizar operaciones de gestion de clientes y productos.
+    las operaciones que permite realizar son las siguientes:
+    
+    CLIENTES:
+    
+      * Obtener todos los clientes
+      * Crear un nuevo cliente
+      * Editar un cliente
+      * Eliminar un clientes
+    
+    Productos:
+    
+    * Obtener todos los productos
+    * Crear un nuevo productos
+    * Editar un producto
+    * Eliminar un producto
+  version: 1.0.0
+servers:
+  - url: https://localhost:7004/api/Clientes
+tags:
+  name: clientes
+  description: Este endpoint maneja toda informacion relacionada con la informacion de clientes
+  
+paths:
+  /:
+    post:
+      tags:
+        
+    
+    
+ 

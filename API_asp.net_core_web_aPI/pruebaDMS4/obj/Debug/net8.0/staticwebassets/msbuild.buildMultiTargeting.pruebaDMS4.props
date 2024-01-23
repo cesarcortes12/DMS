@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\pruebaDMS4.props" />
+</Project>

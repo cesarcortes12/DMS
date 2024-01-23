@@ -1,0 +1,6 @@
+@pruebaDMS4_HostAddress = http://localhost:5002
+
+GET {{pruebaDMS4_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
